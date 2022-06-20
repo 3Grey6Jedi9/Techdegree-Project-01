@@ -6,7 +6,7 @@ puntuations=[]
 player_score = 0
 
 def start_game(player_score):
-    print("Welcome ladies and gentlement to this super cool game")
+    print("Are you ready to play this super cool game?!...Alright let's begin!")
     correct_answer = random.randrange(1,11)
     puntuations.append(player_score)
     highest_score = max(puntuations)
@@ -39,10 +39,10 @@ def start_game(player_score):
                     raise ValueError("Only integers between 1 and 10, please")
             except ValueError as err:
                 print(err)
-                player_number = input("Please enter a number between 1 and 10: ")
+                start_game(player_score)
             except TypeError:
                 print("Only integer numbers please, thanks")
-                player_number = input("Please enter a number between 1 and 10: ")
+                start_game(player_score)
             else:
                 continue
         print("Well done!!!, You got it!!!... You just needed {} attempts!".format(attempts))
