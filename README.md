@@ -1,2 +1,2 @@
-# Techdegree-Project-01
- Python Project 01
+# Python Techdegree Project-01
+ Number_Game_Project
