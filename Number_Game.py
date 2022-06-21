@@ -2,62 +2,66 @@ import random
 import Score
 
 
-puntuations=[]
-player_score = 0
 
-def start_game(player_score):
-    print("Are you ready to play this super cool game?!...Alright let's begin!")
+def start_game():
+    print("""    ---------------------------------------------------------------------
+    Are you ready to play this super cool game?!... Alright let's begin!
+    ---------------------------------------------------------------------""")
     correct_answer = random.randrange(1,11)
+    player_score = 0
+    puntuations =[]
     puntuations.append(player_score)
     highest_score = max(puntuations)
-    try:
+    again = 'yes'
+    attempts = 0
+    while ValueError or again == 'yes':
         player_number = input("Please enter a number between 1 and 10: ")
-        if player_number % 1 != 0:
-            raise ValueError("Only integers between 1 and 10, please")
-        elif player_number not in range(1,11):
-            raise ValueError("Only integers between 1 and 10, please")
-        else:
-            attempts = 1
-    except ValueError as err:
-        print(err)
-        start_game(player_score)
-    except TypeError:
-        print("Only integer numbers please, thanks")
-        start_game(player_score)
-    else:
-        while correct_answer != player_number:
+        try:
+            player_number = float(player_number)
+            if float(player_number) % 1 != 0:
+                raise ValueError
+            elif int(player_number) not in range(1,11):
+                raise ValueError
+            else:
+                player_number = int(player_number)
+                if player_number < correct_answer:
+                    print("It's higher")
+                    attempts += 1
+                elif player_number > correct_answer:
+                    print("It's lower")
+                    attempts += 1
+                else:
+                    attempts += 1
+                    print("Well done!!!, You got it!!!... You just needed {} attempts!".format(attempts))
+                    player_score = int(Score.Score(attempts, highest_score))
+                    again = input("That was fun! \nWould you like to play again?").lower()
+                    puntuations.append(player_score)
+                    highest_score = max(puntuations)
+                    if again != 'yes' and again != 'no':
+                        print("Sorry, you must answer yes or no")
+                    elif again == 'no':
+                        print("Ooh we were having so much fun... As you wish")
+                        break
+                    else:
+                        attempts = 0
+                        print("""Cooool!! let's play again!!...Let's see if you can beat the highest score,
+                                now is {}""".format(highest_score))
+        except ValueError:
+            print("Only integers please and they must be inside the given range")
             attempts += 1
-            if player_number < correct_answer:
-                print("It's higher")
-            else:
-                print("It's lower")
-            try:
-                player_number = input("Please enter a number between 1 and 10: ")
-                if player_number % 1 != 0:
-                    raise ValueError("Only integers between 1 and 10, please")
-                elif player_number not in range(1,11):
-                    raise ValueError("Only integers between 1 and 10, please")
-            except ValueError as err:
-                print(err)
-                start_game(player_score)
-            except TypeError:
-                print("Only integer numbers please, thanks")
-                start_game(player_score)
-            else:
-                continue
-        print("Well done!!!, You got it!!!... You just needed {} attempts!".format(attempts))
-        player_score = int(Score.Score(attempts, highest_score))
-        again = str(input("would you like to play again?"))
-        while again != 'yes' and again != 'no':
-            print("You must answer yes or not")
-            again = str(input("would you like to play again?"))
-        if again.lower() == 'yes':
-            start_game(player_score)
-        elif again.lower() == 'no':
-            print("alright, as you wish the game is over")
 
 
 
 
 
-start_game(player_score)
+
+
+
+
+
+
+
+
+
+
+start_game()
