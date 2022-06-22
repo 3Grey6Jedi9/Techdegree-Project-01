@@ -37,13 +37,15 @@ def start_game():
                     again = input("That was fun! \nWould you like to play again?").lower()
                     puntuations.append(player_score)
                     highest_score = max(puntuations)
-                    if again != 'yes' and again != 'no':
+                    while again != 'yes' and again != 'no':
                         print("Sorry, you must answer yes or no")
-                    elif again == 'no':
+                        again = input("Would you like to play again?").lower()
+                    if again == 'no':
                         print("Ooh we were having so much fun... As you wish")
                         break
                     else:
                         attempts = 0
+                        correct_answer = random.randrange(1,11)
                         print("""Cooool!! let's play again!!...Let's see if you can beat the highest score,
                                 now is {}""".format(highest_score))
         except ValueError:
