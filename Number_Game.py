@@ -47,7 +47,7 @@ def start_game():
                         attempts = 0
                         correct_answer = random.randrange(1,11)
                         print("""Cooool!! let's play again!!...Let's see if you can beat the highest score,
-                                now is {}""".format(highest_score))
+now is {}""".format(highest_score))
         except ValueError:
             print("Only integers please and they must be inside the given range")
             attempts += 1
